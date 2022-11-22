@@ -6,7 +6,7 @@ const Home: NextPage = () => {
   return (
     <div className="">
       <Head>
-        <title>Create Next App</title>
+        <title>ts-nextjs-apple-store</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <h1>hello world!</h1>
