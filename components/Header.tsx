@@ -28,14 +28,16 @@ const Header = () => {
         <a className="headerLink">Contact us</a>
       </div>
 
-      <div className="flex space-x-5 md:w-1/5">
+      <div className="flex items-center space-x-5 md:w-1/5">
         <MagnifyingGlassIcon className="headerIcon" />
-        <div className="relative cursor-pointer">
-          <span className="absolute -right-1 -top-1 z-50 flex h-4 w-4 items-center justify-center rounded-full bg-gradient-to-r from-pink-500 to-violet-500">
-            5
-          </span>
-          <BriefcaseIcon className="headerIcon" />
-        </div>
+        <Link href="/shop">
+          <div className="relative cursor-pointer">
+            <span className="absolute -right-1 -top-1 z-50 flex h-4 w-4 items-center justify-center rounded-full bg-gradient-to-r from-pink-500 to-violet-500">
+              5
+            </span>
+            <BriefcaseIcon className="headerIcon" />
+          </div>
+        </Link>
       </div>
     </header>
   );
