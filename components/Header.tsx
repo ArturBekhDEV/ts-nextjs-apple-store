@@ -35,7 +35,7 @@ const Header = () => {
         <MagnifyingGlassIcon className="headerIcon" />
         <Link href="/shop">
           <div className="relative cursor-pointer">
-            <span className="absolute -right-1 -top-1 z-50 flex h-4 w-4 items-center justify-center rounded-full bg-gradient-to-r from-pink-500 to-violet-500">
+            <span className="absolute -right-1 -top-1 z-50 flex h-4 w-4 items-center justify-center rounded-full bg-gradient-to-r from-pink-500 to-violet-500 text-[11px] text-[white]">
               5
             </span>
             <BriefcaseIcon className="headerIcon" />
