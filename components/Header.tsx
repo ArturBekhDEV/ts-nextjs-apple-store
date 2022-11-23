@@ -4,9 +4,12 @@ import Link from "next/link";
 import {
   MagnifyingGlassIcon,
   BriefcaseIcon,
+  UserIcon,
 } from "@heroicons/react/24/outline";
 
 const Header = () => {
+  const session = false;
+
   return (
     <header className="sticky top-0 z-30 flex w-full items-center justify-between bg-[#eaeef0] p-5">
       <div className="flex items-center justify-center md:w-1/5">
@@ -38,6 +41,25 @@ const Header = () => {
             <BriefcaseIcon className="headerIcon" />
           </div>
         </Link>
+
+        {session ? (
+          <Image
+            src={
+              //   session.user?.image ||
+              "https://www.gravatar.com/avatar/00000000000000000000000000000000?d=mp&f=y"
+            }
+            alt=""
+            className="cursor-pointer rounded-full"
+            width={34}
+            height={34}
+            // onClick={() => signOut()}
+          />
+        ) : (
+          <UserIcon
+            className="headerIcon"
+            //    onClick={() => signIn()}
+          />
+        )}
       </div>
     </header>
   );
