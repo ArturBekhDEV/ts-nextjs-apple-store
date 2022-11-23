@@ -1,6 +1,11 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
+import {
+  MagnifyingGlassIcon,
+  BriefcaseIcon,
+} from "@heroicons/react/24/outline";
+
 const Header = () => {
   return (
     <header className="sticky top-0 z-30 flex w-full items-center justify-between bg-[#eaeef0] p-5">
@@ -23,7 +28,15 @@ const Header = () => {
         <a className="headerLink">Contact us</a>
       </div>
 
-      {/* <div className="flex md:w-1/5">hello</div> */}
+      <div className="flex space-x-5 md:w-1/5">
+        <MagnifyingGlassIcon className="headerIcon" />
+        <div className="relative cursor-pointer">
+          <span className="absolute -right-1 -top-1 z-50 flex h-4 w-4 items-center justify-center rounded-full bg-gradient-to-r from-pink-500 to-violet-500">
+            5
+          </span>
+          <BriefcaseIcon className="headerIcon" />
+        </div>
+      </div>
     </header>
   );
 };
