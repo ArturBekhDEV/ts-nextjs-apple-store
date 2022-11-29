@@ -1,4 +1,5 @@
 import React from "react";
+import Spline from "@splinetool/react-spline";
 
 const MainLandingPahe = () => {
   return (
@@ -16,6 +17,9 @@ const MainLandingPahe = () => {
         <div>
           {/* <Button title="Buy now" /> */}
           <a className="link">Learn More</a>
+        </div>
+        <div>
+          <Spline scene="https://prod.spline.design/KKoTrCA0O4mcYlrG/scene.splinecode" />
         </div>
       </div>
     </section>
