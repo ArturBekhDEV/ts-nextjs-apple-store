@@ -28,7 +28,7 @@ const Header = () => {
         <a className="headerLink">About</a>
         <a className="headerLink">Support</a>
         <a className="headerLink">Business</a>
-        <a className="headerLink">Contact us</a>
+        <a className="headerLink">Contact</a>
       </div>
 
       <div className="flex items-center justify-center space-x-5 md:w-1/5">

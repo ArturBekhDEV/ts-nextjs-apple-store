@@ -16,7 +16,7 @@ const MainLandingPahe = () => {
           <span className="block">Changing world.</span>
           <div className="text-xl space-x-4">
             <Button title="Buy now" />
-            <a className="link text-sm">Learn More</a>
+            <a className="link text-sm font-bold">Learn More</a>
           </div>
         </h1>
       </div>
