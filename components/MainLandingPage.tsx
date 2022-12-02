@@ -4,7 +4,7 @@ import Button from "./Button";
 
 const MainLandingPahe = () => {
   return (
-    <section className="sticky top-0 mx-auto h-screen max-w-[1350px] items-center justify-between px-8 lg:flex ">
+    <section className=" sticky top-0 mx-auto h-screen max-w-[1350px] items-center justify-between px-8 lg:flex ">
       <div className="space-y-4">
         <h1 className="space-y-4 text-6xl font-bold lg:text-6xl xl:text-7xl">
           <span className="block bg-gradient-to-r from-pink-500 to-violet-500 bg-clip-text text-transparent">
