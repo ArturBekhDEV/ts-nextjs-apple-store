@@ -3,9 +3,16 @@ import Head from "next/head";
 import Header from "../components/Header";
 import MainLandingPage from "../components/MainLandingPage";
 import { Tab } from "@headlessui/react";
-const Home: NextPage = () => {
+import { fetchCategories } from "../utils/fetchCategories";
+
+interface Props {
+  categories: Category[];
+}
+
+const Home = ({ categories }: Props) => {
+  console.log(categories);
   return (
-    <div className="">
+    <div>
       <Head>
         <title>ts-nextjs-apple-store</title>
         <link rel="icon" href="/favicon.ico" />
@@ -53,10 +60,12 @@ const Home: NextPage = () => {
 export default Home;
 
 // backend code
-export const getServerSideProps: GetServerSideProps = async () => {
-  // const categories = await fetchCategories();
+export const getServerSideProps: GetServerSideProps<Props> = async () => {
+  const categories = await fetchCategories();
 
   return {
-    props: {},
+    props: {
+      categories,
+    },
   };
 };
