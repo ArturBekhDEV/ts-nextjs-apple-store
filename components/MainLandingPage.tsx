@@ -1,11 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import Spline from "@splinetool/react-spline";
 import Button from "./Button";
+import Image from "next/image";
 
 const MainLandingPahe = () => {
+  const [object, setObject] = useState(true);
   return (
-    <section className="sticky top-0 mx-auto h-screen max-w-[1350px] items-center justify-between px-8 lg:flex text-center  lg:text-left">
-      <div className="space-y-8">
+    <section className="sticky top-0 mx-auto h-screen max-w-[1350px] items-center justify-between px-8 lg:flex text-center lg:text-left">
+      <div className="space-y-12">
         <h1 className="space-y-3 text-5xl font-semibold tracking-wide lg:text-6xl xl:text-7xl">
           <span className="block bg-gradient-to-r from-pink-500 to-violet-500 bg-clip-text text-transparent">
             Powered
@@ -22,11 +24,15 @@ const MainLandingPahe = () => {
         </div>
       </div>
 
-      <div className="relative hidden transition-all duration-500 sm:block ">
-        <Spline
+      <div className="relative hidden transition-all duration-500 md:block ">
+        {/* <Spline
+          id="1"
           className="mx-auto"
           scene="https://prod.spline.design/KKoTrCA0O4mcYlrG/scene.splinecode"
-        />
+        /> */}
+      </div>
+      <div className="relative hidden h-[450px] w-[450px] transition-all duration-500 md:inline lg:h-[650px] lg:w-[600px">
+        <Image src="/weird-250.gif" layout="fill" objectFit="contain" />
       </div>
     </section>
   );
