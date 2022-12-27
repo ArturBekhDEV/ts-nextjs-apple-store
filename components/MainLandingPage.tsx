@@ -1,10 +1,20 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, use } from "react";
 import Spline from "@splinetool/react-spline";
 import Button from "./Button";
 import Image from "next/image";
 
 const MainLandingPahe = () => {
   const [object, setObject] = useState(true);
+
+  if (typeof window !== "undefined") {
+    const w = window.innerWidth;
+    useEffect(() => {
+      if (w < 770) {
+        setObject(false);
+      }
+    }, [w]);
+  }
+
   return (
     <section className="sticky top-0 mx-auto h-screen max-w-[1350px] items-center justify-between px-8 lg:flex text-center lg:text-left">
       <div className="space-y-12">
@@ -24,16 +34,18 @@ const MainLandingPahe = () => {
         </div>
       </div>
 
-      <div className="relative hidden transition-all duration-500 md:block ">
-        {/* <Spline
-          id="1"
-          className="mx-auto"
-          scene="https://prod.spline.design/KKoTrCA0O4mcYlrG/scene.splinecode"
-        /> */}
-      </div>
-      <div className="relative hidden h-[450px] w-[450px] transition-all duration-500 md:inline lg:h-[650px] lg:w-[600px">
-        <Image src="/weird-250.gif" layout="fill" objectFit="contain" />
-      </div>
+      {object ? (
+        <div className="relative hidden transition-all duration-500 md:block ">
+          <Spline
+            className="mx-auto"
+            scene="https://prod.spline.design/KKoTrCA0O4mcYlrG/scene.splinecode"
+          />
+        </div>
+      ) : (
+        <div className="mx-auto relative h-[500px] w-[300px] transition-all duration-500">
+          <Image src="/weird-250.gif" layout="fill" objectFit="contain" />
+        </div>
+      )}
     </section>
   );
 };
