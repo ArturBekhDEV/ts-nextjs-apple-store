@@ -7,12 +7,11 @@ const MainLandingPahe = () => {
   const [object, setObject] = useState(true);
 
   if (typeof window !== "undefined") {
-    const w = window.innerWidth;
     useEffect(() => {
-      if (w < 770) {
+      if (window.innerWidth < 770) {
         setObject(false);
       }
-    }, [w]);
+    }, [window.innerWidth]);
   }
 
   return (
@@ -42,7 +41,7 @@ const MainLandingPahe = () => {
           />
         </div>
       ) : (
-        <div className="mx-auto relative h-[500px] w-[300px] transition-all duration-500">
+        <div className="mx-auto relative h-[600px] w-[350px] transition-all duration-500">
           <Image src="/weird-250.gif" layout="fill" objectFit="contain" />
         </div>
       )}
