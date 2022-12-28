@@ -35,7 +35,7 @@ const Home = ({ categories }: Props) => {
                 className={({ selected }) =>
                   `whitespace-nowrap rounded-t-lg py-3 px-5 text-sm font-semibold outline-none md:py-4 md:px-6 md:text-base ${
                     selected
-                      ? "borderGradient bg-[#35383C] text-white"
+                      ? "borderGradient bg-[#cc318f] text-white"
                       : "border-b-2 border-[#35383C] text-[#747474]"
                   }`
                 }
@@ -59,6 +59,7 @@ const Home = ({ categories }: Props) => {
 export default Home;
 
 // backend code
+
 export const getServerSideProps: GetServerSideProps<Props> = async () => {
   const categories = await fetchCategories();
 
