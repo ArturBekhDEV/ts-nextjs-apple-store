@@ -1,14 +1,27 @@
 import Head from "next/head";
 import { useRouter } from "next/router";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import Button from "../components/Button";
 import Header from "../components/Header";
+import Product from "../components/Product";
 import { selectBasketItems } from "../redux/basketSlice";
 
 const Checkout = () => {
   const items = useSelector(selectBasketItems);
   const router = useRouter();
+  const [groupState, setGroupState] = useState(
+    {} as { [key: string]: Product[] }
+  );
+
+  useEffect(() => {
+    const groupedItems = items.reduce((res, item) => {
+      (res[item._id] = res[item._id] || []).push(item);
+      return res;
+    }, {} as { [key: string]: Product[] });
+    setGroupState(groupedItems);
+  }, [items]);
+
   return (
     <div>
       <Head>
@@ -31,6 +44,13 @@ const Checkout = () => {
             />
           )}
         </div>
+        {items.length > 0 && (
+          <div>
+            {Object.entries(groupState).map(([key, item]) => (
+            //   <CheckoutProduct />;
+            ))}
+          </div>
+        )}
       </main>
     </div>
   );
