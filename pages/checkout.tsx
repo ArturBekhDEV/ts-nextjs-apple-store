@@ -9,6 +9,9 @@ import CheckoutProducts from "./CheckoutProducts";
 import Currency from "react-currency-formatter";
 import { selectBasketTotal } from "../redux/basketSlice";
 import { ChevronDownIcon } from "@heroicons/react/24/outline";
+import { Stripe } from "stripe";
+import { fetchPostJSON } from "../utils/api-helpers";
+import getStripe from "../utils/get-stripejs";
 
 const Checkout = () => {
   const items = useSelector(selectBasketItems);
@@ -17,6 +20,7 @@ const Checkout = () => {
   const [groupState, setGroupState] = useState(
     {} as { [key: string]: Product[] }
   );
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     const groupedItems = items.reduce((res, item) => {
@@ -25,6 +29,21 @@ const Checkout = () => {
     }, {} as { [key: string]: Product[] });
     setGroupState(groupedItems);
   }, [items]);
+
+  const createCheckoutSession = async () => {
+    setLoading(true);
+    const checkoutSession: Stripe.Checkout.Session = await fetchPostJSON(
+      "/api/checkout_session",
+      {
+        items: items,
+      }
+    );
+    if ((checkoutSession as any).statusCode === 500) {
+      console.error((checkoutSession as any).message);
+      return;
+    }
+    const stripe = await getStripe();
+  };
 
   return (
     <div className="min-h-screen overflow-hidden bg-[#e0e5e7]">
@@ -55,14 +74,14 @@ const Checkout = () => {
             ))}
             <div className="my-12 mt-6 ml-auto max-w-3xl">
               <div className="divide-y divide-gray-300">
-                <div className="pb-4">
-                  <div className="flex justify-between">
+                <div className="pb-4 font-semibold">
+                  <div className="flex justify-between ">
                     <p>Subtotal:</p>
                     <p>
                       <Currency quantity={basketTotal} currency="USD" />
                     </p>
                   </div>
-                  <div className="flex justify-between">
+                  <div className="flex justify-between ">
                     <p>Shipping</p>
                     <p>Free!</p>
                   </div>
@@ -74,7 +93,7 @@ const Checkout = () => {
                         <ChevronDownIcon className="h-6 w-6" />
                       </p>
                     </div>
-                    <p>$</p>
+                    <p>$ - </p>
                   </div>
                 </div>
 
@@ -89,7 +108,7 @@ const Checkout = () => {
               <div className="my-14 space-y-4">
                 <h4 className="text-xl font-bold">Let's go and checkout ?</h4>
                 <div className="flex flex-col gap-4 md:flex-row">
-                  <div className="order-2 flex flex-1 flex-col items-center rounded-l bg-gray-300 p-8 py-12 text-center">
+                  <div className="order-2 flex flex-1 flex-col items-center rounded-l bg-gray-200 p-8 py-12 text-center">
                     <h4 className="mb-4 flex flex-col text-xl font-bold">
                       <span>Pay Monthly</span>
                       <span>with Aplle Card</span>
@@ -101,6 +120,20 @@ const Checkout = () => {
                     <p className="mt-2 max-w-[240px] text-[13px]">
                       $ 0.00 due today.
                     </p>
+                  </div>
+
+                  <div className="flex flex-1 flex-col items-center space-y-8 rounded-l bg-gray-300 p-8 py-12 md:order-2">
+                    <h4 className="mb-4 flex flex-col text-xl font-bold">
+                      Pay in full :
+                      <span>
+                        <Currency quantity={basketTotal} currency="USD" />
+                      </span>
+                    </h4>
+                    <Button
+                      noIcon
+                      title="Pay now"
+                      onClick={createCheckoutSession}
+                    />
                   </div>
                 </div>
               </div>
