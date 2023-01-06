@@ -6,6 +6,7 @@ import Button from "../components/Button";
 import Header from "../components/Header";
 import Product from "../components/Product";
 import { selectBasketItems } from "../redux/basketSlice";
+import CheckoutProducts from "./CheckoutProducts";
 
 const Checkout = () => {
   const items = useSelector(selectBasketItems);
@@ -46,8 +47,8 @@ const Checkout = () => {
         </div>
         {items.length > 0 && (
           <div>
-            {Object.entries(groupState).map(([key, item]) => (
-            //   <CheckoutProduct />;
+            {Object.entries(groupState).map(([key, items]) => (
+              <CheckoutProducts key={key} items={items} id={key} />
             ))}
           </div>
         )}
