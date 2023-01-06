@@ -23,14 +23,14 @@ const Checkout = () => {
   }, [items]);
 
   return (
-    <div>
+    <div className="min-h-screen overflow-hidden bg-[#e0e5e7]">
       <Head>
         <title>Checkout Bag - Apple</title>
         <link rel="icon" href="/favicon.icon"></link>
       </Head>
       <Header />
-      <main>
-        <div>
+      <main className="mx-auto max-w-5xl pb-24">
+        <div className="px-5">
           <h1 className="my-4 text-3xl font-bold lg:text-4xl">
             {items.length > 0 ? "Review your bag!" : "Your bag is empty."}
           </h1>
@@ -45,7 +45,7 @@ const Checkout = () => {
           )}
         </div>
         {items.length > 0 && (
-          <div>
+          <div className="mx-5 md:mx-8">
             {Object.entries(groupState).map(([key, items]) => (
               <CheckoutProducts key={key} items={items} id={key} />
             ))}
