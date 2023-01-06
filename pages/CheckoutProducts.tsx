@@ -2,12 +2,26 @@ import React from "react";
 import { urlFor } from "../sanity";
 import Image from "next/image";
 import { ChevronDownIcon } from "@heroicons/react/24/outline";
+import Currency from "react-currency-formatter";
+import { useDispatch } from "react-redux";
+import { removeFromBasket } from "../redux/basketSlice";
+import { toast } from "react-hot-toast";
 
 interface Props {
   items: Product[];
   id: string;
 }
 const CheckoutProducts = ({ id, items }: Props) => {
+  const dispatch = useDispatch();
+
+  const removeItemFromBasket = () => {
+    dispatch(removeFromBasket({ id }));
+
+    toast.error(`${items[0].title} removed from basket`, {
+      position: "bottom-center",
+    });
+  };
+
   return (
     <div>
       <div className="relative h-44 w-44">
@@ -31,6 +45,20 @@ const CheckoutProducts = ({ id, items }: Props) => {
             Show products details:
             <ChevronDownIcon className="w-6 h-6 text-blue-500" />
           </p>
+        </div>
+        <div>
+          <h4>
+            <Currency
+              quantity={items.reduce((total, item) => total + item.price, 0)}
+              currency="USD"
+            />
+          </h4>
+          <button
+            className="text-blue-500 hover:text-blue-700"
+            onClick={removeItemFromBasket}
+          >
+            Remove
+          </button>
         </div>
       </div>
     </div>

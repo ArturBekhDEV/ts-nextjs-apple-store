@@ -21,13 +21,18 @@ export const basketSlice = createSlice({
       state: BasketState,
       action: PayloadAction<{ id: string }>
     ) => {
-      const findIndexItem = state.items.findIndex((item) => {
-        item._id === action.payload.id;
+      const index = state.items.findIndex((item: Product) => {
+        return item._id === action.payload.id;
       });
+
       let newBasket = [...state.items];
-      if (findIndexItem >= 0) {
-        newBasket.splice(findIndexItem, 1);
-      } else console.log("Cant find item in basket!");
+
+      if (index >= 0) {
+        newBasket.splice(index, 1);
+      } else {
+        console.log("Cant find item in basket!");
+      }
+      state.items = newBasket;
     },
   },
 });

@@ -4,7 +4,6 @@ import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import Button from "../components/Button";
 import Header from "../components/Header";
-import Product from "../components/Product";
 import { selectBasketItems } from "../redux/basketSlice";
 import CheckoutProducts from "./CheckoutProducts";
 
