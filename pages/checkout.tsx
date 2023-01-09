@@ -43,6 +43,12 @@ const Checkout = () => {
       return;
     }
     const stripe = await getStripe();
+
+    const { error } = await stripe!.redirectToCheckout({
+      sessionId: checkoutSession.id,
+    });
+    console.warn(error.message);
+    setLoading(false);
   };
 
   return (
@@ -131,6 +137,7 @@ const Checkout = () => {
                     </h4>
                     <Button
                       noIcon
+                      loading={loading}
                       title="Pay now"
                       onClick={createCheckoutSession}
                     />
