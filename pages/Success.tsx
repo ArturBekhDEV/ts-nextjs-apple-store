@@ -1,9 +1,3 @@
-// import {
-//     CheckIcon,
-//     ChevronDownIcon,
-//     ChevronUpIcon,
-//     ShoppingCartIcon,
-//   } from "@heroicons/react/outline";
 import {
   CheckIcon,
   ChevronDownIcon,
@@ -19,8 +13,13 @@ import { useEffect, useState } from "react";
 import Currency from "react-currency-formatter";
 import { useMediaQuery } from "react-responsive";
 import Button from "../components/Button";
+import { fetchLineItems } from "../utils/fetchLineItems";
 //   import { fetchLineItems } from "../utils/fetchLineItems";
 //   import { useSession } from "next-auth/react";
+
+interface Props {
+  products: StripeProduct[];
+}
 
 const Success = () => {
   const router = useRouter();
@@ -38,6 +37,10 @@ const Success = () => {
   const handleShow = () => {
     setShowOrderSummary(!showOrderSummary);
   };
+
+  //   const subtotal = products.reduce((acc, item) => {
+  //     return acc + item.price.unit_amount / 100;
+  //   }, 0);
 
   return (
     <div>
@@ -122,9 +125,16 @@ const Success = () => {
 
         {mounted && (
           <section>
-            <div>
-              <div>
-                <button onClick={() => handleShow}>
+            <div
+              className={`w-full ${
+                showOrderSummaryCondition && "border-b"
+              } border-gray-300 text-sm lg:hidden`}
+            >
+              <div className="mx-auto flex max-w-xl items-center justify-between px-4 py-6">
+                <button
+                  onClick={() => handleShow}
+                  className="flex items-center space-x-2"
+                >
                   <ShoppingCartIcon className="h-6 w-" />
                   <p>Show order summary</p>
                   {showOrderSummaryCondition ? (
@@ -133,8 +143,18 @@ const Success = () => {
                     <ChevronDownIcon className="h-4 w-4 " />
                   )}
                 </button>
+
+                <p className="text-xl font-medium text-black">
+                  {/* <Currency quantity={subtotal + 20} /> */}
+                </p>
               </div>
             </div>
+
+            {showOrderSummaryCondition && (
+              <div>
+                <div></div>
+              </div>
+            )}
           </section>
         )}
       </main>
@@ -143,3 +163,12 @@ const Success = () => {
 };
 
 export default Success;
+export const getServerSideProps: GetServerSideProps<Props> = async ({
+  query,
+}) => {
+  const sessionId = query.session_id as string;
+  const products = await fetchLineItems(sessionId);
+  return {
+    props: {},
+  };
+};
