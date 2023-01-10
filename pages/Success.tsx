@@ -21,7 +21,7 @@ interface Props {
   products: StripeProduct[];
 }
 
-const Success = () => {
+const Success = ({ products }: Props) => {
   const router = useRouter();
   const { session_id } = router.query;
   const [mounted, setMounted] = useState(false);
@@ -38,9 +38,9 @@ const Success = () => {
     setShowOrderSummary(!showOrderSummary);
   };
 
-  //   const subtotal = products.reduce((acc, item) => {
-  //     return acc + item.price.unit_amount / 100;
-  //   }, 0);
+  const subtotal = products.reduce((acc, item) => {
+    return acc + item.price.unit_amount / 100;
+  }, 0);
 
   return (
     <div>
@@ -145,14 +145,41 @@ const Success = () => {
                 </button>
 
                 <p className="text-xl font-medium text-black">
-                  {/* <Currency quantity={subtotal + 20} /> */}
+                  <Currency quantity={subtotal + 20} />
                 </p>
               </div>
             </div>
 
             {showOrderSummaryCondition && (
               <div>
-                <div></div>
+                <div>
+                  {products.map((item) => (
+                    <div
+                      key={item.id}
+                      className="flex items-center space-x-4 text-sm font-medium"
+                    >
+                      <div className="relative flex h-16 w-16 items-center justify-center rounded-sm border border-gray-300 bg-[#F1F1F1] text-xs text-white">
+                        <div className="relative h-7 w-7 animate-bounce rounded-md">
+                          <Image
+                            src="https://rb.gy/vsvv2o"
+                            layout="fill"
+                            objectFit="contain"
+                          />
+                        </div>
+                        <div className="absolute -right-2 -top-2 flex h-5 w-5 items-center justify-center rounded-full bg-[gray] text-xs">
+                          {item.quantity}
+                        </div>
+                      </div>
+                      <p className="flex-1">{item.description}</p>
+                      <p>
+                        <Currency
+                          quantity={item.price.unit_amount / 100}
+                          currency={item.currency}
+                        />
+                      </p>
+                    </div>
+                  ))}
+                </div>
               </div>
             )}
           </section>
@@ -169,6 +196,8 @@ export const getServerSideProps: GetServerSideProps<Props> = async ({
   const sessionId = query.session_id as string;
   const products = await fetchLineItems(sessionId);
   return {
-    props: {},
+    props: {
+      products,
+    },
   };
 };
