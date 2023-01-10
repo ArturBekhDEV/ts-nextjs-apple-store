@@ -4,6 +4,7 @@
 //     ChevronUpIcon,
 //     ShoppingCartIcon,
 //   } from "@heroicons/react/outline";
+import { CheckIcon } from "@heroicons/react/24/outline";
 import { GetServerSideProps } from "next";
 import Head from "next/head";
 import Image from "next/image";
@@ -17,6 +18,8 @@ import Button from "../components/Button";
 //   import { useSession } from "next-auth/react";
 
 const Success = () => {
+  const router = useRouter();
+  const { session_id } = router.query;
   return (
     <div>
       <Head>
@@ -46,6 +49,19 @@ const Success = () => {
               />
             </div>
           </Link>
+
+          <div>
+            <div className="flex h-11 w-11 items-center justify-center rounded-full border-2 border-black">
+              <CheckIcon className="h-8 w-8" />
+            </div>
+            <div>
+              <p>Order #{session_id?.slice(-5)}</p>
+              <h4>
+                Thank you!
+                {/* {session ? session_user?.name?.split('')[0]: 'Guest'} */}
+              </h4>
+            </div>
+          </div>
         </section>
       </main>
     </div>
