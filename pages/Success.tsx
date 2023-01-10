@@ -4,7 +4,12 @@
 //     ChevronUpIcon,
 //     ShoppingCartIcon,
 //   } from "@heroicons/react/outline";
-import { CheckIcon } from "@heroicons/react/24/outline";
+import {
+  CheckIcon,
+  ChevronDownIcon,
+  ChevronUpIcon,
+  ShoppingCartIcon,
+} from "@heroicons/react/24/outline";
 import { GetServerSideProps } from "next";
 import Head from "next/head";
 import Image from "next/image";
@@ -12,7 +17,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import Currency from "react-currency-formatter";
-//   import { useMediaQuery } from "react-responsive";
+import { useMediaQuery } from "react-responsive";
 import Button from "../components/Button";
 //   import { fetchLineItems } from "../utils/fetchLineItems";
 //   import { useSession } from "next-auth/react";
@@ -20,6 +25,20 @@ import Button from "../components/Button";
 const Success = () => {
   const router = useRouter();
   const { session_id } = router.query;
+  const [mounted, setMounted] = useState(false);
+  const [showOrderSummary, setShowOrderSummary] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  const isTabletOrMobile = useMediaQuery({ query: "(max-width:1024px" });
+  const showOrderSummaryCondition = isTabletOrMobile ? showOrderSummary : true;
+
+  const handleShow = () => {
+    setShowOrderSummary(!showOrderSummary);
+  };
+
   return (
     <div>
       <Head>
@@ -90,8 +109,34 @@ const Success = () => {
           </div>
           <div>
             <p className="hidden lg:inline">Need Help? Contact us</p>
+            {mounted && (
+              <Button
+                title="Continue Shopping"
+                onClick={() => router.push("/")}
+                width={isTabletOrMobile ? "w-full" : undefined}
+                padding="py-4"
+              />
+            )}
           </div>
         </section>
+
+        {mounted && (
+          <section>
+            <div>
+              <div>
+                <button onClick={() => handleShow}>
+                  <ShoppingCartIcon className="h-6 w-" />
+                  <p>Show order summary</p>
+                  {showOrderSummaryCondition ? (
+                    <ChevronUpIcon className="h-4 w-4" />
+                  ) : (
+                    <ChevronDownIcon className="h-4 w-4 " />
+                  )}
+                </button>
+              </div>
+            </div>
+          </section>
+        )}
       </main>
     </div>
   );
