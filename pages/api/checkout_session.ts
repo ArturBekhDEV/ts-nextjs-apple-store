@@ -13,7 +13,6 @@ export default async function handler(
   if (req.method === "POST") {
     const items: Product[] = req.body.items;
 
-    // This is the shape in which stripe expects the data to be
     const transformedItems = items.map((item) => ({
       price_data: {
         currency: "usd",
@@ -27,7 +26,6 @@ export default async function handler(
     }));
 
     try {
-      // Create Checkout Sessions from body params
       const params: Stripe.Checkout.SessionCreateParams = {
         payment_method_types: ["card"],
         // shipping_address_collection: {
