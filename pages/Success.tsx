@@ -60,7 +60,7 @@ const Success = ({ products }: Props) => {
         </Link>
       </header>
 
-      <main className="">
+      <main className="grid grid-cols-1 lg:grid-cols-9">
         <section className="order-2 mx-auto max-w-xl pb-12 lg:mx-0 lg:max-w-none lg:pr-16 lg:pt-16 xl:pl-16 2xl:pl-44">
           <Link href="/">
             <div className="relative ml-14 hidden h-24 w-12 cursor-pointer transition lg:inline-flex">
@@ -110,7 +110,7 @@ const Success = ({ products }: Props) => {
               You’ll get shipping and delivery updates by email and text.
             </p>
           </div>
-          <div>
+          <div className="mx-4 flex flex-col items-center justify-between text-sm lg:ml-14 lg:flex-row">
             <p className="hidden lg:inline">Need Help? Contact us</p>
             {mounted && (
               <Button
@@ -124,7 +124,7 @@ const Success = ({ products }: Props) => {
         </section>
 
         {mounted && (
-          <section>
+          <section className="overflow-y-scroll border-y border-l border-gray-300 bg-[#FAFAFA] lg:order-2 lg:col-span-4 lg:h-screen lg:border-y-0">
             <div
               className={`w-full ${
                 showOrderSummaryCondition && "border-b"
@@ -151,8 +151,8 @@ const Success = ({ products }: Props) => {
             </div>
 
             {showOrderSummaryCondition && (
-              <div>
-                <div>
+              <div className="mx-auto max-w-xl divide-y border-gray-300 px-4 py-4 lg:mx-0 lg:max-w-lg lg:px-10 lg:py-16">
+                <div className="space-y-4 pb-4">
                   {products.map((item) => (
                     <div
                       key={item.id}
@@ -180,13 +180,32 @@ const Success = ({ products }: Props) => {
                     </div>
                   ))}
                 </div>
-                <div>
-                  <div>
+                <div className="space-y-1 py-4">
+                  <div className="flex justify-between text-sm">
                     <p className="text-[gray]">Subtotal</p>
                     <p className="font-medium">
                       <Currency quantity={subtotal} />
                     </p>
                   </div>
+                  <div className="flex justify-between text-sm">
+                    <p className="text-[gray]">Discount</p>
+                    <p className="text-[gray]"></p>
+                  </div>
+                  <div className="flex justify-between text-sm">
+                    <p className="text-[gray]">Shipping</p>
+                    <p className="font-medium">
+                      <Currency quantity={20} currency="USD" />
+                    </p>
+                  </div>
+                </div>
+                <div className="flex justify-between pt-4">
+                  <p>Total</p>
+                  <p className="flex items-center gap-x-2 text-xs text-[gray]">
+                    USD
+                    <span className="text-xl font-medium text-black">
+                      <Currency quantity={subtotal + 20} />
+                    </span>
+                  </p>
                 </div>
               </div>
             )}
