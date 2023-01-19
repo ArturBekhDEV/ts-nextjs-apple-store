@@ -140,7 +140,7 @@ const Success = ({ products }: Props) => {
                   {showOrderSummaryCondition ? (
                     <ChevronUpIcon className="h-4 w-4" />
                   ) : (
-                    <ChevronDownIcon className="h-4 w-4 " />
+                    <ChevronDownIcon className="h-4 w-4" />
                   )}
                 </button>
 
