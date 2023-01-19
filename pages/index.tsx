@@ -1,22 +1,20 @@
-import type { GetServerSideProps, NextPage } from "next";
-import Head from "next/head";
-import Header from "../components/Header";
-import MainLandingPage from "../components/MainLandingPage";
 import { Tab } from "@headlessui/react";
+import type { GetServerSideProps } from "next";
+import Head from "next/head";
+import Basket from "../components/Basket";
+import Header from "../components/Header";
+import Product from "../components/Product";
+import MainLandingPage from "../components/MainLandingPage";
 import { fetchCategories } from "../utils/fetchCategories";
 import { fetchProducts } from "../utils/fetchProducts";
-import Product from "../components/Product";
-import Basket from "../components/Basket";
-import { getSession } from "next-auth/react";
-import type { Session } from "next-auth";
 
 interface Props {
   categories: Category[];
   products: Product[];
-  session: Session | null;
 }
 
 const Home = ({ categories, products }: Props) => {
+  console.log(categories);
   const showProducts = (category: number) => {
     return products
       .filter((item) => item.category._ref === categories[category]._id)
@@ -74,16 +72,14 @@ export default Home;
 
 // backend code
 
-export const getServerSideProps: GetServerSideProps<Props> = async (contex) => {
-  const products = await fetchProducts();
+export const getServerSideProps: GetServerSideProps<Props> = async () => {
   const categories = await fetchCategories();
-  const session = await getSession(contex);
+  const products = await fetchProducts();
 
   return {
     props: {
-      products,
       categories,
-      session,
+      products,
     },
   };
 };

@@ -8,6 +8,7 @@ import {
 } from "@heroicons/react/24/outline";
 import { useSelector } from "react-redux";
 import { selectBasketItems } from "../redux/basketSlice";
+// import { signIn, signOut, useSession } from "next-auth/react";
 
 const Header = () => {
   const session = false;
@@ -50,7 +51,7 @@ const Header = () => {
         {session ? (
           <Image
             src={
-              //   session.user?.image ||
+              // session.user?.image ||
               "https://www.gravatar.com/avatar/00000000000000000000000000000000?d=mp&f=y"
             }
             alt=""
@@ -62,7 +63,7 @@ const Header = () => {
         ) : (
           <UserIcon
             className="headerIcon"
-            //    onClick={() => signIn()}
+            //  onClick={() => signIn()}
           />
         )}
       </div>
