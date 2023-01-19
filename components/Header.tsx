@@ -9,10 +9,19 @@ import {
 import { useSelector } from "react-redux";
 import { selectBasketItems } from "../redux/basketSlice";
 import { signIn, signOut, useSession } from "next-auth/react";
+import toast from "react-hot-toast";
+import Button from "./Button";
 
 const Header = () => {
-  const session = false;
+  const { data: session } = useSession();
   const items = useSelector(selectBasketItems);
+
+  const handleLogoutFunction = () => {
+    toast.success("We hope to see you back here! Come on and join us!", {
+      duration: 10000,
+    });
+    signOut();
+  };
 
   return (
     <header className="sticky top-0 z-30 flex w-full items-center justify-between bg-[#eaeef0] p-5">
@@ -49,17 +58,23 @@ const Header = () => {
         </Link>
 
         {session ? (
-          <Image
-            src={
-              // session.user?.image ||
-              "https://www.gravatar.com/avatar/00000000000000000000000000000000?d=mp&f=y"
-            }
-            alt=""
-            className="cursor-pointer rounded-full"
-            width={34}
-            height={34}
-            // onClick={() => signOut()}
-          />
+          <div className="flex items-center justify-center">
+            <div>
+              <Image
+                src={
+                  session.user?.image ||
+                  "https://www.gravatar.com/avatar/00000000000000000000000000000000?d=mp&f=y"
+                }
+                alt=""
+                className="rounded-full"
+                width={34}
+                height={34}
+              />
+            </div>
+            <div className="flex mx-6">
+              <Button title="Logout" onClick={handleLogoutFunction} />
+            </div>
+          </div>
         ) : (
           <UserIcon className="headerIcon" onClick={() => signIn()} />
         )}
