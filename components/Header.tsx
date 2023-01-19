@@ -71,7 +71,7 @@ const Header = () => {
                 height={34}
               />
             </div>
-            <div className="flex mx-6">
+            <div className="flex mx-6 w-4 h-10 ">
               <Button title="Logout" onClick={handleLogoutFunction} />
             </div>
           </div>
