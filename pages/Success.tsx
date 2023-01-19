@@ -180,6 +180,14 @@ const Success = ({ products }: Props) => {
                     </div>
                   ))}
                 </div>
+                <div>
+                  <div>
+                    <p className="text-[gray]">Subtotal</p>
+                    <p className="font-medium">
+                      <Currency quantity={subtotal} />
+                    </p>
+                  </div>
+                </div>
               </div>
             )}
           </section>
