@@ -5,7 +5,7 @@ import { useSelector } from "react-redux";
 import Button from "../components/Button";
 import Header from "../components/Header";
 import { selectBasketItems } from "../redux/basketSlice";
-import CheckoutProducts from "./CheckoutProducts";
+import CheckoutProducts from "../components/CheckoutProducts";
 import Currency from "react-currency-formatter";
 import { selectBasketTotal } from "../redux/basketSlice";
 import { ChevronDownIcon } from "@heroicons/react/24/outline";
