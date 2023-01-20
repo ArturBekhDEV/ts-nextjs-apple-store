@@ -29,6 +29,7 @@ const Header = () => {
         <Link href="/">
           <div className="relative h-10 w-5 cursor-pointer opacity-75 transition hover:opacity-100">
             <Image
+              alt=""
               src="https://rb.gy/vsvv2o"
               layout="fill"
               objectFit="contain"

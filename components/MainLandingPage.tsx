@@ -42,7 +42,12 @@ const MainLandingPahe = () => {
         </div>
       ) : (
         <div className="mx-auto relative h-[600px] w-[350px] transition-all duration-500">
-          <Image src="/weird-250.gif" layout="fill" objectFit="contain" />
+          <Image
+            src="/weird-250.gif"
+            layout="fill"
+            objectFit="contain"
+            alt=""
+          />
         </div>
       )}
     </section>
