@@ -14,8 +14,7 @@ import Currency from "react-currency-formatter";
 import { useMediaQuery } from "react-responsive";
 import Button from "../components/Button";
 import { fetchLineItems } from "../utils/fetchLineItems";
-//   import { fetchLineItems } from "../utils/fetchLineItems";
-//   import { useSession } from "next-auth/react";
+import { useSession } from "next-auth/react";
 
 interface Props {
   products: StripeProduct[];
@@ -41,6 +40,8 @@ const Success = ({ products }: Props) => {
   const subtotal = products.reduce((acc, item) => {
     return acc + item.price.unit_amount / 100;
   }, 0);
+
+  const { data: session } = useSession();
 
   return (
     <div>
@@ -82,7 +83,7 @@ const Success = ({ products }: Props) => {
               </p>
               <h4 className="text-lg">
                 Thank you!
-                {/* {session ? session_user?.name?.split('')[0]: 'Guest'} */}
+                {/* {session ? session_user?.name?.split("")[0] : "Guest"} */}
               </h4>
             </div>
           </div>
